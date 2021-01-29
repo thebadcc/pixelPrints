@@ -18,13 +18,15 @@ contract pixelPrints is ERC721 {
    
     address owner = msg.sender;
     string public termsURI = "";
+    string public version = "0.1";
+    
    
     modifier onlyOwner {
       require(msg.sender == owner);
       _;
     } 
 
-    constructor () ERC721 ("pixelPrints", "PP") public {}
+    constructor () ERC721 ("pxlPrints", "PXLP") public {}
     
     function mintToken (address _owner, uint _tokenID, string memory _tokenURI) public onlyOwner {
         _mint(_owner, _tokenID);
@@ -43,11 +45,16 @@ contract pixelPrints is ERC721 {
         owner = _owner;
     }
     
-    function updateContract (string memory _baseURI, string memory _termsURI) public onlyOwner{
-        _setBaseURI(_baseURI);
+    function updateTermsURI (string memory _termsURI) public onlyOwner{
         termsURI = _termsURI;
-        
     }
     
+    function updateVersion (string memory _version) public onlyOwner{
+        version = _version;
+    }
+    
+    function setBaseURI (string memory _baseURI) public onlyOwner{
+        _setBaseURI(_baseURI);
+    }
     
 }
