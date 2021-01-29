@@ -16,8 +16,9 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contr
 
 contract pixelPrints is ERC721 {
    
-address owner = msg.sender;
-  
+    address owner = msg.sender;
+    string public termsURI = "";
+   
     modifier onlyOwner {
       require(msg.sender == owner);
       _;
@@ -25,7 +26,7 @@ address owner = msg.sender;
 
     constructor () ERC721 ("pixelPrints", "PP") public {}
     
-    function createToken (address _owner, uint _tokenID, string memory _tokenURI) public onlyOwner {
+    function mintToken (address _owner, uint _tokenID, string memory _tokenURI) public onlyOwner {
         _mint(_owner, _tokenID);
         _setTokenURI(_tokenID, _tokenURI);
     }
@@ -34,7 +35,19 @@ address owner = msg.sender;
         _setTokenURI(_tokenID, _tokenURI);
     }
     
+    function burnToken (uint _tokenID) public onlyOwner {
+        _burn(_tokenID);
+    }
+    
     function transferOwnership (address _owner) public onlyOwner {
         owner = _owner;
     }
+    
+    function updateContract (string memory _baseURI, string memory _termsURI) public onlyOwner{
+        _setBaseURI(_baseURI);
+        termsURI = _termsURI;
+        
+    }
+    
+    
 }
