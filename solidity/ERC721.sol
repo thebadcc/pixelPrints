@@ -56,7 +56,7 @@ contract pixelPrints is ERC721 {
     
     function setBaseURI (string memory _baseURI) public onlyOwner{
         _setBaseURI(_baseURI);
-        eSetBaseURI(_baseURI);
+        emit eSetBaseURI(_baseURI);
     }
     
     event eMintToken(address _owner, uint _tokenID, string _tokenURI);
