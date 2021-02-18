@@ -1,10 +1,11 @@
 {
     "name":"...",
+    "artist":"...",
+    "description":"...",
     "asset_url":"...",
     "contract_url":"...",
-    "license": "...",
-    "description":"...",
-    "artist":"...",
+    "copyright_url":"...",
+    "terms_url": "...",
     "tags":[
         "...",
         "...",
