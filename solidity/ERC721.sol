@@ -123,6 +123,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
     function baseURI() public view virtual returns (string memory) {
         return _baseURI;
     }
+    
 
     /**
      * @dev See {IERC721Enumerable-tokenOfOwnerByIndex}.
@@ -385,6 +386,11 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable 
      */
     function _setBaseURI(string memory baseURI_) internal virtual {
         _baseURI = baseURI_;
+    }
+    
+    function _setDescription(string memory name_, string memory symbol_) internal virtual {
+        _name = name_;
+        _symbol = symbol_;
     }
 
     /**
