@@ -1,4 +1,4 @@
-pragma solidity >=0.6.0 <0.8.0;
+pragma solidity ^0.8.0;
 
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Context.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/IERC721.sol";
@@ -14,18 +14,19 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contr
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol";
 
 
-contract pxlPrnts is ERC721 {
+contract pixelPrints is ERC721 {
    
     address owner = msg.sender;
     string public termsURI = "";
-    
+    string private  name_ = "pxlPrnts";
+    string private  symbol_ = "PXLP";
    
     modifier onlyOwner {
       require(msg.sender == owner);
       _;
     } 
 
-    constructor () ERC721 ("pxlPrints", "PXLP") public {}
+    constructor () ERC721 ("", "") {}
     
     function mintToken (address _owner, uint _tokenID, string memory _tokenURI) public onlyOwner {
         _mint(_owner, _tokenID);
@@ -59,11 +60,27 @@ contract pxlPrnts is ERC721 {
         emit eSetBaseURI(_baseURI);
     }
     
+    function name() public view virtual override returns (string memory) {
+        return name_;
+    }
+    
+    function symbol() public view virtual override returns (string memory) {
+        return symbol_;
+    }
+    
+    function SetNameAndSymbol(string memory _name, string memory _symbol) public onlyOwner  {
+        name_ = _name;
+        symbol_ = _symbol;
+        emit eSetNameAndSymbol(_name, _symbol);
+    }
+    
+
     event eMintToken(address _owner, uint _tokenID, string _tokenURI);
     event eUpdateTokenURI(uint _tokenID, string _tokenURI);
     event eBurnToken(uint _tokenID);
     event eTransferOwnership(address _owner, address _newOwner);
     event eUpdateTokenURI(string _termsURI);
     event eSetBaseURI(string _baseURI);
+    event eSetNameAndSymbol(string _name, string _symbol);
 
 }
